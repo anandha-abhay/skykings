@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="68" height="40" tilewidth="15" tileheight="15">
+ <tileset firstgid="1" name="Background" tilewidth="15" tileheight="15">
+  <tileoffset x="7" y="0"/>
+  <image source="Background.png" width="64" height="600"/>
+ </tileset>
+ <tileset firstgid="161" name="pillar" tilewidth="15" tileheight="15">
+  <tileoffset x="7" y="0"/>
+  <image source="pillar.png" width="66" height="42"/>
+ </tileset>
+ <tileset firstgid="169" name="pillar-base" tilewidth="15" tileheight="15">
+  <tileoffset x="7" y="0"/>
+  <image source="base.png" width="102" height="31"/>
+ </tileset>
+ <layer name="Background" width="68" height="40" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztx9ciEAAAhtE/EoqISlr2SoXSQKJsoYwyG2YRUWZDSWW0zIymR/W9R//FuTgBkgKxF3sQ8J9/H4IRgiBf+3EAYQj1dRARiES4ryhE4zAO+TqKGBzDEV/HcQInEevrNOIQj1O+EpGEZCT4SkUa0pHi6wwycRYZvs4jC9k45+sCLiIXOb4u4wqu4pKvfBTgGvJ8XUcRilHo6yZKUIobvspRgUqU+arGLdSgylcdbuMOan01oBFNqPd1D81owV1fbWhHB1p9PcBDPMJ9X13oRg86ffXhMZ6g19cAnmIQ/b6eYRgjGPL1AqMYw3NfE5jEFMZ9vcJrvMFLX2/xDjOY9jWLD/iI977mMI8FfPL1GV/wFYu+vmMJy/jmaxVrWMeKrw1sYgs/fP3EL/zGtq+/+Icd/PG1C/6pV34=
+  </data>
+ </layer>
+ <objectgroup name="Ground Collision" width="68" height="40" visible="0">
+  <object x="0" y="0" width="1020" height="30"/>
+  <object x="0" y="555" width="1020" height="45"/>
+  <object x="450" y="720"/>
+ </objectgroup>
+ <layer name="Pillars" width="68" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmksKAlEQA+f+9/D/dzygAXHRsxG0h8ShCrJNmoK3e8MA0MNO2SsH5aiclHNAl2v3olyVm3JXRuUR0OXcXSlrZaNsf7yts8u1m9rl2k3tcu2mdrl2U7tcu6ldrt3Urn/Y/QQ+Kvio4KPScdc3Hfjo350DfFTwUVmCj7SuJfnoAB8VfFTwUcFHBR8V9z3u/Snue9z7U9z3pL09fMx3j3sfH/1d+JjvHvc+Pvq7nD7S/sO4/tS8SfsP4/pTAwAvnpjBFhQ=
+  </data>
+ </layer>
+ <objectgroup name="Pillar Collision" width="68" height="40">
+  <object x="180" y="30" width="75" height="30"/>
+  <object x="195" y="60" width="45" height="105"/>
+  <object x="195" y="285" width="45" height="240"/>
+  <object x="180" y="525" width="75" height="30"/>
+  <object x="465" y="525" width="75" height="30"/>
+  <object x="480" y="525" width="30"/>
+  <object x="480" y="420" width="45" height="105"/>
+  <object x="480" y="60" width="45" height="240"/>
+  <object x="465" y="30" width="75" height="30"/>
+  <object x="735" y="210" width="45" height="315"/>
+  <object x="720" y="525" width="75" height="30"/>
+  <object x="915" y="30" width="75" height="30"/>
+  <object x="930" y="60" width="45" height="315"/>
+ </objectgroup>
+</map>

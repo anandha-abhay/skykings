@@ -1,0 +1,46 @@
+<canvas id="mainCanvas" width="800" height="600"></canvas>
+<script src="http://galloman.github.com/ss2d/lib/ss2dLib-min.js"></script>
+<script>
+  var view = new ss2d.View('mainCanvas');
+  var p1 = new ss2d.Quad(
+    30, // x
+    100, // y
+    40, // width
+    40, // height
+    [255,255,0]); // color
+
+  p1.mPicked = false;
+
+  // move by pivoting to the center of the object
+  p1.mPivotX = p1.mPivotY = 20;
+
+  p1.tick = function(deltaTime) {
+    // mouse input
+    var input = ss2d.CURRENT_VIEW.mInput;
+
+    // check if the mouse is down for the frame and not the previous
+    // make sure we have clicked the object
+    if(input.mMouseDown && !input.mPreviousMouseDown) {
+      // See if the click is inside the object
+      if(this.hitTestPoint(input.mMousePoint)) {
+        this.mPicked = true;
+      }
+    }
+
+    this.mPicked = this.mPicked && input.mMouseDown;
+
+    // move the object
+    if(this.mPicked) {
+      console.log(input.mMouseX);
+      console.log(input.mMouseY);
+      this.mLocation.mX = input.mMouseX;
+      this.mLocation.mY = input.mMouseY;
+    }
+  };
+
+  // add the object to the scene
+  view.mMainScene.addObject(p1);
+
+  // run the program
+  view.startLoop();
+</script>
