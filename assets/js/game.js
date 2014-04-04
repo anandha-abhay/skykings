@@ -2,6 +2,7 @@
 
   window.Game = function(){
     this.view = new ss2d.View('mainCanvas');
+    this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
     this.sprites = [
       new SpriteGuy({
         guy: (new ss2d.ReelSprite(30,150,3,'assets/img/hedgehog.reelset','flying')),
