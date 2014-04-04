@@ -1,0 +1,14 @@
+{
+  "image": "blanka.png",
+  "comments": "I have no idea what Im doing", 
+  "reels": {
+    "flying": {
+      "duration": 0.3,
+      "frames":[
+        [0,0,50,50,0,0],
+        [70,0,50,50,0,0],
+        [140,0,50,50,0,0]
+      ]
+    }
+  }
+}

@@ -11,7 +11,7 @@
     this.guy.upKey = ss2d.Input.Keys[options.upKey];
     this.guy.attackKey = ss2d.Input.Keys[options.attackKey];
     this.guy.blockKey = ss2d.Input.Keys[options.blockKey];
-    this.guy.mPivotX = this.guy.mPivotY = 20;
+    //this.guy.mPivotX = this.guy.mPivotY = 20;
     this.guy.tick = this.tick.bind(this);
   }
 
@@ -28,7 +28,7 @@
     },
     flyTo : function(pos) {
       var p = pos;
-      this.guy.mRotation = 1
+      //this.guy.mRotation = 1
       var flyLooper = (function(){
         var newPos = this.guy.mLocation.mY - 10;
         if (newPos >= p-10) {
@@ -62,9 +62,14 @@
       this.blinkInvincible() // prevent multiple attacks at a time
     },
     tick: function(deltaTime) {
+      if(!this.guy.mPlayingReel) return;
+      //update sprite reel state
+      this.guy.updateReelAnimation(deltaTime);
+      if(this.guy.mPlayingReel.mName != 'flying')
+        this.guy.playReel('flying')
       var input = ss2d.CURRENT_VIEW.mInput;
       // fall 5px per frame
-      if(this.guy.mLocation.mY < 580) {
+      if(this.guy.mLocation.mY < 480) {
         this.guy.mLocation.mY += 2;
       }
       this.attacking = false;

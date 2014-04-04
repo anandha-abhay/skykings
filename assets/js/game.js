@@ -4,12 +4,12 @@
     this.view = new ss2d.View('mainCanvas');
     this.sprites = [
       new SpriteGuy({
-        guy: (new ss2d.Sprite(30,100,40,40,'assets/img/cat.png')),
+        guy: (new ss2d.ReelSprite(30,50,0.5,'assets/img/cat.reelset','flying')),
         upKey: "S", attackKey: "A", blockKey: "D",
         name: "Cat"
       }),
       new SpriteGuy({
-        guy: (new ss2d.Sprite(30,50,40,40,'assets/img/chicken.png')),
+        guy: (new ss2d.ReelSprite(30,50,1.5,'assets/img/blanka.reelset','flying')),
         upKey: "K", attackKey: "J", blockKey: "L",
         name: "Chicken"
       })
