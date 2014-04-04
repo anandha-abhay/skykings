@@ -1,4 +1,4 @@
-!function(_,window,undefined) {
+!function(_,ss2d,window,undefined) {
 
   window.Game = function(){
     this.view = new ss2d.View('mainCanvas');
@@ -7,18 +7,24 @@
       new SpriteGuy({
         guy: (new ss2d.ReelSprite(30,150,3,'assets/img/hedgehog.reelset','flying')),
         upKey: "S", attackKey: "A", blockKey: "D",
-        name: "Cat"
+        name: "Sonic"
       }),
       new SpriteGuy({
         guy: (new ss2d.ReelSprite(30,50,1.5,'assets/img/blanka.reelset','flying')),
         upKey: "K", attackKey: "J", blockKey: "L",
-        name: "Chicken"
+        name: "Blanka"
       })
     ]
-    for(var i = this.sprites.length; i--;){
+    this.scoreBoard = new ScoreBoard
+
+    var i;
+    for(i = this.sprites.length; i--;){
+      this.scoreBoard.add(this.sprites[i])
       this.view.mMainScene.addObject(this.sprites[i].guy);
     }
-
+    for(i = this.scoreBoard.lifeMeters.length; i--; ) {
+      this.view.mMainScene.addObject(this.scoreBoard.lifeMeters[i].HPTextDisplay);
+    }
   }
 
   _.extend(Game.prototype, {
@@ -27,4 +33,4 @@
       this.view.startLoop();
     }
   });
-}(_,this)
+}(_,ss2d,this)

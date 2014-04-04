@@ -1,4 +1,4 @@
-!function(_,window,undefined) {
+!function(_,ss2d,window,undefined) {
 
   window.SpriteGuy = function(options){
     this.hp = 10;
@@ -15,7 +15,7 @@
     this.guy.tick = this.tick.bind(this);
   }
 
-  _.extend(SpriteGuy.prototype, {
+  _.extend(window.SpriteGuy.prototype, EventEmitter.prototype,  {
     flap : function(){
       var currentPos = this.guy.mLocation.mY;
       if(isNaN(currentPos)) return;
@@ -58,8 +58,9 @@
       this.invincible = 100;
     },
     takeDamage : function(){
-      this.hp = this.hp - 1
+      this.hp = Math.max(this.hp - 1)
       this.blinkInvincible() // prevent multiple attacks at a time
+      this.emit('hpAdjust')
     },
     tick: function(deltaTime) {
       if(!this.guy.mPlayingReel) return;
@@ -89,11 +90,8 @@
       if(collidingWith){
         if(this.attacking && !collidingWith.blocking && !collidingWith.invincible) {
           collidingWith.takeDamage();
-          console.log(collidingWith.name, "hit! current hp:", collidingWith.hp)
-        } else if(this.attacking && collidingWith.blocking) {
-          console.log(collidingWith.name, "blocked attack from ", this.name)
         }
       }
     }
   })
-}(_,this)
+}(_,ss2d,this)
