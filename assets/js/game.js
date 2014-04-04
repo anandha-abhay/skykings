@@ -4,7 +4,7 @@
     this.view = new ss2d.View('mainCanvas');
     this.sprites = [
       new SpriteGuy({
-        guy: (new ss2d.ReelSprite(30,50,0.5,'assets/img/cat.reelset','flying')),
+        guy: (new ss2d.ReelSprite(30,150,3,'assets/img/hedgehog.reelset','flying')),
         upKey: "S", attackKey: "A", blockKey: "D",
         name: "Cat"
       }),

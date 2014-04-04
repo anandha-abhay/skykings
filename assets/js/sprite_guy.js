@@ -69,7 +69,7 @@
         this.guy.playReel('flying')
       var input = ss2d.CURRENT_VIEW.mInput;
       // fall 5px per frame
-      if(this.guy.mLocation.mY < 480) {
+      if(this.guy.mLocation.mY < 500) {
         this.guy.mLocation.mY += 2;
       }
       this.attacking = false;

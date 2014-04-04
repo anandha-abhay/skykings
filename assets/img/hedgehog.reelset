@@ -1,13 +1,14 @@
 {
-  "image": "blanka.png",
+  "image": "hedgehog.png",
   "comments": "I have no idea what Im doing", 
   "reels": {
     "flying": {
       "duration": 0.3,
       "frames":[
-        [0,0,51,51,0,0],
-        [70,0,51,51,0,0],
-        [139,0,51,51,0,0]
+        [0,0,26,26,0,0],
+        [29,0,26,26,0,0],
+        [58,0,26,26,0,0],
+        [87,0,26,26,0,0]
       ]
     }
   }
