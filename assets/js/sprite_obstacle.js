@@ -26,8 +26,8 @@
 
       colliderBounds = this.obstacle.getBounds();
       middle = colliderBounds.mY + 600;
-      gapUpperBound = middle - 65;
-      gapLowerBound = middle + 65;
+      gapUpperBound = middle - 100;
+      gapLowerBound = middle + 100;
 
       for(var childIndex in this.obstacle.mParent.mChildren) {
         var brother = this.obstacle.mParent.mChildren[childIndex];

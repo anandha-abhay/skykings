@@ -19,7 +19,7 @@
       new SpriteObstacle({
         obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
         scene: this.view.mMainScene,
-        speed: 2
+        speed: 5
       })
     ];
     this.scoreBoard = new ScoreBoard

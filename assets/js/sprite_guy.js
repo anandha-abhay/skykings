@@ -58,9 +58,11 @@
       this.invincible = 100;
     },
     takeDamage : function(){
-      this.hp = Math.max(0,this.hp - 1)
-      this.blinkInvincible() // prevent multiple attacks at a time
-      this.emit('hpAdjust')
+      if(!this.invincible) {
+        this.hp = Math.max(0,this.hp - 1)
+        this.blinkInvincible() // prevent multiple attacks at a time
+        this.emit('hpAdjust')
+      }
     },
     tick: function(deltaTime) {
       if(!this.guy.mPlayingReel) return;
