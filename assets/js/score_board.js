@@ -4,7 +4,7 @@
   }
   _.extend(window.ScoreBoard.prototype, {
     add : function(player) {
-      this.lifeMeters.push(new LifeMeter({player:player, y: 20, x:(this.lifeMeters.length * 200)}))
+      this.lifeMeters.push(new LifeMeter({player:player, y: 40, x:(this.lifeMeters.length * 400)}))
     }
   });
 }(_,ss2d,this)

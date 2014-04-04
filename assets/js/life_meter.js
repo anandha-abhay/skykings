@@ -1,7 +1,7 @@
 !function(_,ss2d,window,undefined) {
   window.LifeMeter = function(options){
     this.player = options.player
-    this.HPTextDisplay = new ss2d.TextSprite(options.x, options.y, '', '#000000', 14)
+    this.HPTextDisplay = new ss2d.TextSprite(options.x, options.y, '', '#ffffff', 24, "Comic Sans MS")
     this.adjust()
     this.player.addListener('hpAdjust', _.bind(this.adjust,this))
   }
