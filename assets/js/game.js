@@ -14,17 +14,26 @@
         upKey: "K", attackKey: "J", blockKey: "L",
         name: "Blanka"
       })
-    ]
+    ];
+    this.obstacles = [
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 2
+      })
+    ];
     this.scoreBoard = new ScoreBoard
 
     var i;
     for(i = this.sprites.length; i--;){
       this.scoreBoard.add(this.sprites[i])
-      this.view.mMainScene.addObject(this.sprites[i].guy);
     }
     for(i = this.scoreBoard.lifeMeters.length; i--; ) {
       this.view.mMainScene.addObject(this.scoreBoard.lifeMeters[i].HPTextDisplay);
     }
+
+    addObjects(this.sprites, this.view.mMainScene, "guy");
+    addObjects(this.obstacles, this.view.mMainScene, "obstacle");
   }
 
   _.extend(Game.prototype, {
@@ -33,4 +42,10 @@
       this.view.startLoop();
     }
   });
+
+  function addObjects(objects, scene, objectKey) {
+    for(var i = objects.length; i--;){
+      scene.addObject(objects[i][objectKey]);
+    }
+  }
 }(_,ss2d,this)
