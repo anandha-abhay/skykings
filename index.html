@@ -1,38 +1,29 @@
 <canvas id="mainCanvas" width="800" height="600"></canvas>
 <script src="vendor/ss2dLib.js"></script>
+<script src="assets/js/sprite_guy.js"></script>
 <script>
+!function(){
+  document.getElementById('mainCanvas').focus()
   var view = new ss2d.View('mainCanvas');
 
   var p1 = new ss2d.Quad(30,100,40,40,[255,255,0]);
   var p2 = new ss2d.Quad(30,50,40,40,[255,0,255]);
+  var sprites = [
+    new SpriteGuy({
+      guy: (new ss2d.Quad(30,100,40,40,[255,255,0])),
+      upKey: ss2d.Input.Keys.A
+    }),
+    new SpriteGuy({
+      guy: (new ss2d.Quad(30,50,40,40,[255,0,255])),
+      upKey: ss2d.Input.Keys.L
+    })
+  ]
 
-  var SpriteGuy = function(options){
-    var _this = this;
-    this.guy = options.guy;
-    this.guy.upKey = options.upKey;
-    this.guy.mPivotX = this.guy.mPivotY = 20;
-    this.guy.tick = function() { _this.flap.apply(_this.guy,arguments); }
+  for(var i = sprites.length; i--;){
+    view.mMainScene.addObject(sprites[i].guy);
   }
 
-  SpriteGuy.prototype.flap = function(deltaTime) {
-    var input = ss2d.CURRENT_VIEW.mInput;
-
-    // fall 5px per frame
-    if(this.mLocation.mY < 580) {
-      this.mLocation.mY += 5;
-    }
-    if(input.isKeyPressed(this.upKey) && this.mLocation.mY > 20) {
-      // raise 20px per frame
-      this.mLocation.mY -= 20;
-    }
-  }
-
-  var sprite1 = new SpriteGuy({guy: p1, upKey: ss2d.Input.Keys.A});
-  var sprite2 = new SpriteGuy({guy: p2, upKey: ss2d.Input.Keys.L});
-
-  // add the object to the scene
-  view.mMainScene.addObject(sprite1.guy);
-  view.mMainScene.addObject(sprite2.guy);
   // run the program
   view.startLoop();
+}()
 </script>
