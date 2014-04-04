@@ -45,7 +45,7 @@
       for(var childIndex in this.guy.mParent.mChildren) {
         var brother = this.guy.mParent.mChildren[childIndex];
         //check that the other object is not itself
-        if(brother != this.guy) {
+        if(brother != this.guy && brother.character) {
           //if the objects collide change the direction.
           if(colliderBounds.intersectsRectangle(brother.getBounds())) {
             return brother.character;
