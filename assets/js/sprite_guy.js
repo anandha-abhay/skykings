@@ -58,21 +58,28 @@
       this.invincible = 100;
     },
     takeDamage : function(){
-      this.hp = Math.max(this.hp - 1)
+      this.hp = Math.max(0,this.hp - 1)
       this.blinkInvincible() // prevent multiple attacks at a time
       this.emit('hpAdjust')
     },
     tick: function(deltaTime) {
       if(!this.guy.mPlayingReel) return;
+      var input = ss2d.CURRENT_VIEW.mInput;
+
       //update sprite reel state
       this.guy.updateReelAnimation(deltaTime);
-      if(this.guy.mPlayingReel.mName != 'flying')
-        this.guy.playReel('flying')
-      var input = ss2d.CURRENT_VIEW.mInput;
+      if(this.invincible){
+        if(this.guy.mPlayingReel.mName != 'invincible')
+          this.guy.playReel('invincible')
+      }else{
+        if(this.guy.mPlayingReel.mName != 'flying')
+          this.guy.playReel('flying')
+      }
       // fall 5px per frame
       if(this.guy.mLocation.mY < 500) {
         this.guy.mLocation.mY += 2;
       }
+
       this.attacking = false;
       this.blocking = false;
       this.invincible = Math.max(0,this.invincible - 1);
