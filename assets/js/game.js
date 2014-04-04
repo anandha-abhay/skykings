@@ -20,7 +20,57 @@
         obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
         scene: this.view.mMainScene,
         speed: 5
-      })
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(1000, -450, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(1300, -300, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(1600, -450, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(1900, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(2100, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
+      new SpriteObstacle({
+        obstacle: (new ss2d.Sprite(700, -400, 64, 1200, 'assets/img/pillar.png')),
+        scene: this.view.mMainScene,
+        speed: 5
+      }),
     ];
     this.scoreBoard = new ScoreBoard
 

@@ -12,12 +12,11 @@
   _.extend(SpriteObstacle.prototype, {
     tick: function(deltaTime) {
       this.obstacle.mLocation.mX -= this.speed;
+      if(this.obstacle.mLocation.mX === -100) {
+        this.obstacle.mLocation.mX = 1700;
+      }
 
       this.processHits();
-
-      // when x = 0, this.scene.removeObject(this);
-      // if there is a collision,
-      // check where it is relative to the (Y) middle of the pillar
     },
 
     processHits: function() {
