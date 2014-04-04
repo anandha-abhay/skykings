@@ -1,8 +1,16 @@
 !function(_,window,undefined) {
 
   window.SpriteGuy = function(options){
+    this.hp = 10;
+    this.invincible = 100; //start game as invincible
+    this.attacking = false;
+    this.blocking = false;
+    this.name = options.name;
     this.guy = options.guy;
-    this.guy.upKey = options.upKey;
+    this.guy.character = this;
+    this.guy.upKey = ss2d.Input.Keys[options.upKey];
+    this.guy.attackKey = ss2d.Input.Keys[options.attackKey];
+    this.guy.blockKey = ss2d.Input.Keys[options.blockKey];
     this.guy.mPivotX = this.guy.mPivotY = 20;
     this.guy.tick = this.tick.bind(this);
   }
@@ -32,14 +40,54 @@
       }).bind(this);
       flyLooper()
     },
+    onPlayer : function(){
+      var colliderBounds = this.guy.getBounds();
+      for(var childIndex in this.guy.mParent.mChildren) {
+        var brother = this.guy.mParent.mChildren[childIndex];
+        //check that the other object is not itself
+        if(brother != this.guy) {
+          //if the objects collide change the direction.
+          if(colliderBounds.intersectsRectangle(brother.getBounds())) {
+            return brother.character;
+          }
+        }
+      }
+      return false;
+    },
+    blinkInvincible : function(){
+      this.invincible = 100;
+    },
+    takeDamage : function(){
+      this.hp = this.hp - 1
+      this.blinkInvincible() // prevent multiple attacks at a time
+    },
     tick: function(deltaTime) {
       var input = ss2d.CURRENT_VIEW.mInput;
       // fall 5px per frame
       if(this.guy.mLocation.mY < 580) {
         this.guy.mLocation.mY += 2;
       }
+      this.attacking = false;
+      this.blocking = false;
+      this.invincible = Math.max(0,this.invincible - 1);
+
+      // only one button can be pressed during a tick
       if(input.isKeyPressed(this.guy.upKey)) {
         this.flap()
+      } else if (input.isKeyPressed(this.guy.attackKey)) {
+        this.attacking = true;
+      } else if(input.isKeyPressed(this.guy.blockKey)) {
+        this.blocking = true;
+      }
+
+      var collidingWith = this.onPlayer()
+      if(collidingWith){
+        if(this.attacking && !collidingWith.blocking && !collidingWith.invincible) {
+          collidingWith.takeDamage();
+          console.log(collidingWith.name, "hit! current hp:", collidingWith.hp)
+        } else if(this.attacking && collidingWith.blocking) {
+          console.log(collidingWith.name, "blocked attack from ", this.name)
+        }
       }
     }
   })

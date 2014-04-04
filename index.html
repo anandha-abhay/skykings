@@ -2,29 +2,10 @@
 <script src="vendor/ss2dLib.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js "></script>
 <script src="assets/js/sprite_guy.js"></script>
+<script src="assets/js/game.js"></script>
 <script>
 !function(){
   document.getElementById('mainCanvas').focus()
-  var view = new ss2d.View('mainCanvas');
-
-  var p1 = new ss2d.Quad(30,100,40,40,[255,255,0]);
-  var p2 = new ss2d.Quad(30,50,40,40,[255,0,255]);
-  var sprites = [
-    new SpriteGuy({
-      guy: (new ss2d.Quad(30,100,40,40,[255,255,0])),
-      upKey: ss2d.Input.Keys.A
-    }),
-    new SpriteGuy({
-      guy: (new ss2d.Quad(30,50,40,40,[255,0,255])),
-      upKey: ss2d.Input.Keys.L
-    })
-  ]
-
-  for(var i = sprites.length; i--;){
-    view.mMainScene.addObject(sprites[i].guy);
-  }
-
-  // run the program
-  view.startLoop();
+  var g = (new Game).run()
 }()
 </script>
