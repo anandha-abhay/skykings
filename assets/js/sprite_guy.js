@@ -62,6 +62,9 @@
         this.hp = Math.max(0,this.hp - 1)
         this.blinkInvincible() // prevent multiple attacks at a time
         this.emit('hpAdjust')
+        if(this.hp == 0) {
+          this.emit('died')
+        }
       }
     },
     tick: function(deltaTime) {

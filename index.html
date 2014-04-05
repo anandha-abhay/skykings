@@ -20,6 +20,13 @@
         font-weight: normal;
         font-style: normal;
       }
+      body {
+        margin: 0;
+      }
+      #content {
+        text-align:center;
+        margin: auto;
+      }
       * {
         font-weight: normal;
       }
@@ -38,74 +45,56 @@
         color: blue;
         margin: 0;
       }
+      .instructions {
+        width:100%;
+        display: table;
+      }
       .instructions .column {
-        float: left;
-        margin-right: 50px;
+        display: table-cell;
       }
-      /**
-      * For modern browsers
-      * 1. The space content is one way to avoid an Opera bug when the
-      *    contenteditable attribute is included anywhere else in the document.
-      *    Otherwise it causes space to appear at the top and bottom of elements
-      *    that are clearfixed.
-      * 2. The use of `table` rather than `block` is only necessary if using
-      *    `:before` to contain the top-margins of child elements.
-      */
-      .cf:before,
-      .cf:after {
-        content: " "; /* 1 */
-        display: table; /* 2 */
-      }
-
-      .cf:after {
-        clear: both;
-      }
-
-      /**
-      * For IE 6/7 only
-      * Include this rule to trigger hasLayout and contain floats.
-      */
-      .cf {
-        *zoom: 1;
+      ul {
+        list-style-type: none;
       }
     </style>
   </head>
   <body>
-    <h1>Sky Kings</h1>
-    <div class='canvas'>
-      <canvas id="mainCanvas" width="800" height="600"></canvas>
-    </div>
-    <div>
-      <div>
-        <div class='instructions cf'>
-          <div class='column'>
-            <h3>Player 1 Controls</h3>
-            <ul>
-              <li>A attacks</li>
-              <li>S flies</li>
-              <li>Hold D to block</li>
-            </ul>
-          </div>
-          <div class='column'>
-            <h3>Player 2 Controls</h3>
-            <ul>
-              <li>J attacks</li>
-              <li>K flies</li>
-              <li>Hold L to block</li>
-            </ul>
-          </div>
-        </div>
+    <div id="content" >
+      <h1>Sky Kings</h1>
+      <div class='canvas'>
+        <canvas id="mainCanvas" width="800" height="600"></canvas>
       </div>
       <div>
-        <h2>About Sky Kings:</h2>
-        Two killer kings just duking it out.  Spark 2014
-        <h3>Credits:</h3>
-        <ul>
-          <li>RoVon Evans</li>
-          <li>Zavonie Johnson</li>
-          <li>Anthony Fojas</li>
-          <li>Matt Abhay</li>
-        </ul>
+        <div>
+          <div class='instructions cf'>
+            <div class='column'>
+              <h3>Player 1 Controls</h3>
+              <ul>
+                <li>A attacks</li>
+                <li>S flies</li>
+                <li>Hold D to block</li>
+              </ul>
+            </div>
+            <div class='column'>
+              <h3>Player 2 Controls</h3>
+              <ul>
+                <li>J attacks</li>
+                <li>K flies</li>
+                <li>Hold L to block</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2>About Sky Kings:</h2>
+          Two killer kings just duking it out.  Spark 2014
+          <h3>Credits:</h3>
+          <ul>
+            <li>RoVon Evans</li>
+            <li>Zavonie Johnson</li>
+            <li>Anthony Fojas</li>
+            <li>Matt Abhay</li>
+          </ul>
+        </div>
       </div>
     </div>
     <script>

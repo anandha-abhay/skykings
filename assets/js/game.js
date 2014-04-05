@@ -1,6 +1,7 @@
 !function(_,ss2d,window,undefined) {
 
   window.Game = function(){
+    document.getElementById('mainCanvas').focus();
     this.view = new ss2d.View('mainCanvas');
     this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
     this.sprites = [
@@ -78,12 +79,12 @@
     for(i = this.sprites.length; i--;){
       this.scoreBoard.add(this.sprites[i])
     }
+    addObjects(this.obstacles, this.view.mMainScene, "obstacle");
     for(i = this.scoreBoard.lifeMeters.length; i--; ) {
       this.view.mMainScene.addObject(this.scoreBoard.lifeMeters[i].HPTextDisplay);
     }
 
     addObjects(this.sprites, this.view.mMainScene, "guy");
-    addObjects(this.obstacles, this.view.mMainScene, "obstacle");
   }
 
   _.extend(Game.prototype, {
