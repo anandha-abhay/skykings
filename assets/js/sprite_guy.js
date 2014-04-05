@@ -73,13 +73,6 @@
 
       //update sprite reel state
       this.guy.updateReelAnimation(deltaTime);
-      if(this.invincible){
-        if(this.guy.mPlayingReel.mName != 'invincible')
-          this.guy.playReel('invincible')
-      }else{
-        if(this.guy.mPlayingReel.mName != 'flying')
-          this.guy.playReel('flying')
-      }
       // fall 5px per frame
       if(this.guy.mLocation.mY < 500) {
         this.guy.mLocation.mY += 2;
@@ -98,6 +91,15 @@
         this.blocking = true;
       }
 
+      if(this.attacking) {
+        if(this.guy.mPlayingReel.mName != 'attack'){ this.guy.playReel('attack'); }
+      }else if(this.invincible){
+        if(this.guy.mPlayingReel.mName != 'invincible')
+          this.guy.playReel('invincible')
+      }else{
+        if(this.guy.mPlayingReel.mName != 'flying')
+          this.guy.playReel('flying')
+      }
       var collidingWith = this.onPlayer()
       if(collidingWith){
         if(this.attacking && !collidingWith.blocking && !collidingWith.invincible) {
