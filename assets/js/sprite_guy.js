@@ -85,6 +85,8 @@
       // only one button can be pressed during a tick
       if(input.isKeyPressed(this.guy.upKey)) {
         this.flap()
+      } else if(this.invincible) {
+        //noop
       } else if (input.isKeyPressed(this.guy.attackKey)) {
         this.attacking = true;
       } else if(input.isKeyPressed(this.guy.blockKey)) {
