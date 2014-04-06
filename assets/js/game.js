@@ -5,15 +5,11 @@
     this.view = new ss2d.View('mainCanvas');
     this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
     this.sprites = [
-      new SpriteGuy({
-        guy: (new ss2d.ReelSprite(30,150,3,'assets/img/hedgehog.reelset','flying')),
-        upKey: "S", attackKey: "A", blockKey: "D",
-        name: "Sonic"
+      CharacterFactory.get({
+        name: "Sonic", keyboard: "1"
       }),
-      new SpriteGuy({
-        guy: (new ss2d.ReelSprite(30,50,1.5,'assets/img/blanka.reelset','flying')),
-        upKey: "K", attackKey: "J", blockKey: "L",
-        name: "Blanka"
+      CharacterFactory.get({
+        name: "Blanka", keyboard: "2"
       })
     ];
     this.obstacles = [
@@ -84,7 +80,7 @@
       this.view.mMainScene.addObject(this.scoreBoard.lifeMeters[i].HPTextDisplay);
     }
 
-    addObjects(this.sprites, this.view.mMainScene, "guy");
+    addObjects(this.sprites, this.view.mMainScene, "container");
   }
 
   _.extend(Game.prototype, {

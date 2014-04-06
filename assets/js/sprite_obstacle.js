@@ -34,13 +34,11 @@
         if(brother != this.obstacle && brother.character) {
           //if the objects collide change the direction.
           if(colliderBounds.intersectsRectangle(brother.getBounds())) {
-            var brotherYUpper = brother.getBounds().mY;
-            var brotherYLower = brother.getBounds().mY + 80;
-            if(brotherYUpper > gapUpperBound && brotherYLower < gapLowerBound) {
-              console.log("Pillar Miss On:" + brother.character.name);
-            } else {
+            //for some reason putting the sprites in a container breaks the getBounds function.
+            var brotherYUpper = brother.mLocation.mY;
+            var brotherYLower = brotherYUpper + 80;
+            if(brotherYUpper < gapUpperBound || brotherYLower > gapLowerBound) {
               brother.character.takeDamage();
-              console.log("Piller Hit On:" + brother.character.name);
             }
           }
         }

@@ -1,0 +1,20 @@
+{
+  "image": "bubble.png",
+  "comments": "I have no idea what Im doing", 
+  "reels": {
+    "block": {
+      "duration": 0,
+      "frames":[
+        [0,0,80,80,0,0],
+        [0,0,80,80,0,0]
+      ]
+    },
+    "open": {
+      "duration": 0,
+      "frames":[
+        [245,0,80,80,0,0],
+        [245,0,80,80,0,0]
+      ]
+    }
+  }
+}
