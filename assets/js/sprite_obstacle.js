@@ -15,7 +15,7 @@
     tick: function(deltaTime) {
       this.obstacle.mLocation.mX -= this.speed;
       if(this.obstacle.mLocation.mX === -100) {
-        this.obstacle.mLocation.mX = 1700;
+        this.obstacle.mLocation.mX = 3300;
       }
 
       this.processHits();
