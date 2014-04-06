@@ -1,6 +1,8 @@
 !function(_,window,undefined) {
 
-  // Gaps are 130px tall
+  // Gaps are 171px tall
+  // the top part of the pillar is 496px
+  // the bottom part of the pillar is 533px
   // The entire sprite is 1200px tall
   window.SpriteObstacle = function(options){
     this.speed = options.speed || 5;
@@ -24,9 +26,9 @@
       var middle, gapLowerBound, gapUpperBound, colliderBounds;
 
       colliderBounds = this.obstacle.getBounds();
-      middle = colliderBounds.mY + 600;
-      gapUpperBound = middle - 100;
-      gapLowerBound = middle + 100;
+      middle = colliderBounds.mY + 581;
+      gapUpperBound = middle - 85;
+      gapLowerBound = middle + 85;
 
       for(var childIndex in this.obstacle.mParent.mChildren) {
         var brother = this.obstacle.mParent.mChildren[childIndex];
