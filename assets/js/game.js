@@ -12,54 +12,16 @@
         name: "Blanka", keyboard: "2"
       })
     ];
-    this.obstacles = [
-      // Middle
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(700, -300, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      // High
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(1100, -350, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      // Very High
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(1400, -450, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      // High
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(1700, -350, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      // Middle
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(2100, -300, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      // Low
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(2500, -200, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      // Very Low
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(2900, -150, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      }),
-      new SpriteObstacle({
-        obstacle: (new ss2d.Sprite(3300, -200, 45, 1200, 'assets/img/pillar.png')),
-        scene: this.view.mMainScene
-      })
-    ];
+    this.obstacles = ObstacleFactory.getSet(10);
+
     this.scoreBoard = new ScoreBoard
 
     var i;
     for(i = this.sprites.length; i--;){
       this.scoreBoard.add(this.sprites[i])
     }
-    addObjects(this.obstacles, this.view.mMainScene, "obstacle");
+    addObjects(this.obstacles, this.view.mMainScene, "sprite");
+
     for(i = this.scoreBoard.lifeMeters.length; i--; ) {
       this.view.mMainScene.addObject(this.scoreBoard.lifeMeters[i].HPTextDisplay);
     }
