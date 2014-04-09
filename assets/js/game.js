@@ -20,23 +20,23 @@
     for(i = this.sprites.length; i--;){
       this.scoreBoard.add(this.sprites[i])
     }
-    addObjects(this.obstacles, this.view.mMainScene, "sprite");
 
-    this.view.mMainScene.addObject(this.scoreBoard.view);
-
-    addObjects(this.sprites, this.view.mMainScene, "container");
+    this.addObjects(this.obstacles, this.view.mMainScene, "sprite");
+    this.addObjects(this.scoreBoard, this.view.mMainScene, "view");
+    this.addObjects(this.sprites, this.view.mMainScene, "container");
   }
 
   _.extend(Game.prototype, {
     run : function(){
       // run the program
       this.view.startLoop();
+    },
+    addObjects : function(objects, scene, objectKey) {
+      if(!objects.push) objects = [objects]
+      for(var i = objects.length; i--;){
+        scene.addObject(objects[i][objectKey]);
+      }
     }
   });
 
-  function addObjects(objects, scene, objectKey) {
-    for(var i = objects.length; i--;){
-      scene.addObject(objects[i][objectKey]);
-    }
-  }
 }(_,ss2d,this)
