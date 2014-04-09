@@ -6,10 +6,10 @@
     this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
     this.sprites = [
       CharacterFactory.get({
-        name: "Sonic", keyboard: "1"
+        name: "Sonic", keyboard: "2"
       }),
       CharacterFactory.get({
-        name: "Blanka", keyboard: "2"
+        name: "Blanka", keyboard: "1"
       })
     ];
     this.obstacles = ObstacleFactory.getSet(10);
@@ -22,9 +22,7 @@
     }
     addObjects(this.obstacles, this.view.mMainScene, "sprite");
 
-    for(i = this.scoreBoard.lifeMeters.length; i--; ) {
-      this.view.mMainScene.addObject(this.scoreBoard.lifeMeters[i].HPTextDisplay);
-    }
+    this.view.mMainScene.addObject(this.scoreBoard.view);
 
     addObjects(this.sprites, this.view.mMainScene, "container");
   }
