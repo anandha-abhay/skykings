@@ -23,6 +23,7 @@
     };
 
     var getSet = function(count) {
+      count = count || 10;
       var obstacles = [];
       for(var i = count; i--;) {
         obstacles.push(get({y:nextHeight()}));
@@ -31,20 +32,21 @@
     }
 
     var nextHeight = function() {
-      var vals = _.values(yPositions);
       if(!lastIndex) {
-        lastIndex = _.random(0,vals.length-1)
+        lastIndex = _.random(0,yPositions.length-1)
       } else {
-        var prev = 0, next = vals.length -1;
-        if(lastIndex < vals.length - 1) {
-          next = lastIndex + 1;
+        // prev & next are the upper and lower bounds of where the pipe can be
+        var prev = Math.max(0,lastIndex - 2)
+          , next = Math.min(yPositions.length - 1, lastIndex + 2)
+          , newIndex = lastIndex
+
+        // opening should not be in the same spot as last time
+        while (newIndex == lastIndex ) {
+          newIndex = _.random(prev,next)
         }
-        if(lastIndex > 0) {
-          prev = lastIndex - 1;
-        }
-        lastIndex = _.random(prev, next);
+        lastIndex = newIndex;
       }
-      return vals[lastIndex];
+      return yPositions[lastIndex];
     }
     return {
       get : get,
@@ -67,7 +69,10 @@
     tick: function(deltaTime) {
       this.sprite.mLocation.mX -= this.speed;
       if(this.sprite.mLocation.mX < -100) {
-        this.sprite.mLocation.mX = ObstacleFactory.nextPos();
+        // subtract 800 pixels because 
+        // sprites disappars 100 pixels off screen
+        // and started 700px onscreen
+        this.sprite.mLocation.mX = ObstacleFactory.nextPos() - 800;
       }
 
       this.processHits();
