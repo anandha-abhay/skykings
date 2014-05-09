@@ -15,7 +15,7 @@
                                35,
                                1200,
                                'assets/img/pillar.png');
-      nextXPosition += 700;
+      nextXPosition += 500;
 
       return (new Obstacle({
         sprite: sprite
