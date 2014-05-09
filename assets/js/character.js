@@ -3,19 +3,31 @@
   window.CharacterFactory= (function(){
     var characters = {
       'Blanka' : {
-        "scale": 1.5,
+        "scale": 2,
         "img"  : "assets/img/blanka.reelset"
       },
       'Sonic' : {
-        "scale": 3,
+        "scale": 4,
         "img"  : "assets/img/hedgehog.reelset"
+      },
+      'Azul' : {
+        "scale": 0.25,
+        "img"  : "assets/img/azul.reelset"
+      },
+      'Naranja' : {
+        "scale": 0.25,
+        "img"  : "assets/img/naranja.reelset"
+      },
+      'Morado' : {
+        "scale": 0.25,
+        "img"  : "assets/img/morado.reelset"
       }
     }
 
     var keyboards = {
       "1" : ["S","A","D"],
       "2" : ["K","J","L"],
-      "3" : ["ARROW_UP","ARROW_LEFT","ARROW_RIGHT"]
+      "3" : ["X","Z","C"]
     }
 
     var getKeyboard = function(keyboard) {
@@ -26,26 +38,38 @@
         "block" : ss2d.Input.Keys[keys[2]]
       };
     }
-
+    var startingSpot = 0;
     var get = function(options) {
       var name = options.name
         , keyboard = options.keyboard
         , c = characters[name]
-        , container = new ss2d.DisplayObjectContainer(30, 150)
+        , container = new ss2d.DisplayObjectContainer(30, (startingSpot++)*100)
 
       // this is the character sprite
       container.guy = (new ss2d.ReelSprite(
         0,0, c.scale, c.img, 'flying'
+      ))
+      container.attack = (new ss2d.ReelSprite(
+        -60,-120, 2, 'assets/img/boom.reelset?foo'+ Math.random(), 'boom'
       ))
       container.guy.container = container;
       container.addObject(container.guy)
 
       // Shield sprite
       container.shield = (new ss2d.Sprite(
-        -30,-25,140,140, 'assets/img/bubble.png'
+        -60,-60,240,240, 'assets/img/bubble.png'
       ));
       container.shield.container = container;
       container.addObject(container.shield)
+      container.addObject(container.attack)
+
+      // there are some issues with the container bounds, let us fake the bounds
+      var fakeAssBounds = container.guy.getBounds();
+      container.boundaries= (new ss2d.Rectangle(
+        container.mLocation.mX,
+        container.mLocation.mY,
+        fakeAssBounds.mWidth,
+        fakeAssBounds.mHeight))
 
       return (new Character({
         name : name,
@@ -65,6 +89,8 @@
     this.container = options.container;
     this.guy = this.container.guy;
     this.shield = this.container.shield;
+    this.attack = this.container.attack;
+    this.boundaries = this.container.boundaries;
     this.keyboard = options.keyboard;
 
     // container can reference Character
@@ -80,6 +106,9 @@
   }
 
   _.extend(window.Character.prototype, EventEmitter.prototype,  {
+    setLocation : function(newPos) {
+      this.boundaries.mY = this.container.mLocation.mY = newPos;
+    },
     flap : function(){
       var currentPos = this.container.mLocation.mY;
       if(isNaN(currentPos)) return;
@@ -96,25 +125,26 @@
       var flyLooper = (function(){
         var newPos = this.container.mLocation.mY - 10;
         if (newPos >= p-10) {
-          this.container.mLocation.mY = newPos;
+          this.setLocation(newPos)
           setTimeout(flyLooper, 15)
         }
       }).bind(this);
       flyLooper()
     },
     onPlayer : function(){
-      var colliderBounds = this.container.getBounds();
+      var colliderBounds = this.boundaries,
+          collidedWith = [];
       for(var childIndex in this.container.mParent.mChildren) {
         var brother = this.container.mParent.mChildren[childIndex];
         //check that the other object is not itself
         if(brother != this.container && brother.character) {
           //if the objects collide change the direction.
-          if(colliderBounds.intersectsRectangle(brother.getBounds())) {
-            return brother.character;
+          if(colliderBounds.intersectsRectangle(brother.boundaries)) {
+            collidedWith.push(brother.character);
           }
         }
       }
-      return false;
+      return collidedWith;
     },
     blinkInvincible : function(){
       this.invincible = 100;
@@ -131,9 +161,9 @@
     },
     attemptAttack : function(){
       var collidingWith = this.onPlayer()
-      if(collidingWith){
-        if(!collidingWith.blocking && !collidingWith.invincible) {
-          collidingWith.takeDamage();
+      for(var i = collidingWith.length; i--;) {
+        if(!collidingWith[i].blocking && !collidingWith[i].invincible) {
+          collidingWith[i].takeDamage();
         }
       }
     },
@@ -144,14 +174,18 @@
       })
     },
     playAnimation : function(animation) {
-      var shield, guy
+      var shield = 0, attack = 0, guy
       if('block' == animation) {
-        this.shield.mAlpha = 1;
+        shield = 1;
         guy = 'flying';
       } else {
-        this.shield.mAlpha = 0;
+        if('attack' == animation) {
+          attack = 1
+        } 
         guy = animation
       }
+      this.shield.mAlpha = shield;
+      this.attack.mAlpha = attack;
 
       if(this.guy.mPlayingReel.mName != guy)
         this.guy.playReel(guy); 
@@ -165,8 +199,8 @@
       this.updateReelAnimations(deltaTime);
 
       // fall 5px per frame
-      if(this.container.mLocation.mY < 500) {
-        this.container.mLocation.mY += 2;
+      if(this.container.mLocation.mY < 480) {
+        this.setLocation(this.container.mLocation.mY + 2);
       }
 
       this.attacking = false;

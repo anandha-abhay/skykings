@@ -5,7 +5,7 @@
   }
   _.extend(window.ScoreBoard.prototype, {
     add : function(player) {
-      var meter = new LifeMeter({player:player, y: 40, x:(this.lifeMeters.length * 400)})
+      var meter = new LifeMeter({player:player, y: 40, x:(this.lifeMeters.length * 200)})
       this.lifeMeters.push(meter)
       this.view.addObject(meter.HPTextDisplay);
     }

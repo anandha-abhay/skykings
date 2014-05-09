@@ -6,22 +6,33 @@
     this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
     this.sprites = [
       CharacterFactory.get({
-        name: "Sonic", keyboard: "2"
+        name: "Azul", keyboard: "2"
       }),
       CharacterFactory.get({
-        name: "Blanka", keyboard: "1"
+        name: "Morado", keyboard: "3"
+      }),
+      CharacterFactory.get({
+        name: "Naranja", keyboard: "1"
       })
     ];
     this.obstacles = ObstacleFactory.getSet(10);
 
     this.scoreBoard = new ScoreBoard
 
-    var i;
+    var i,charac, alive = this.sprites.slice(0);
     for(i = this.sprites.length; i--;){
       this.scoreBoard.add(this.sprites[i])
+      this.sprites[i].addListener('died', function(){
+        alive = _(alive).reject(_.bind(function(sprite){
+          return sprite.name== this.name
+        },this))
+        if(alive.length == 1 && window.confirm( alive[0].name + ' won! New Game?') ){
+          window.location.reload()
+        };
+      })
     }
 
-    this.addObjects(this.obstacles, this.view.mMainScene, "sprite");
+    //this.addObjects(this.obstacles, this.view.mMainScene, "sprite");
     this.addObjects(this.scoreBoard, this.view.mMainScene, "view");
     this.addObjects(this.sprites, this.view.mMainScene, "container");
   }
