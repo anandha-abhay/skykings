@@ -1,6 +1,6 @@
 !function(_,ss2d,window,undefined) {
   window.ObstacleFactory = (function(){
-    var nextXPosition = 700;
+    var nextXPosition = 900;
     var yPositions = [
       -400, -350, -300, -250, -200
     ];
@@ -15,7 +15,7 @@
                                35,
                                1200,
                                'assets/img/pillar.png');
-      nextXPosition += 400;
+      nextXPosition += 700;
 
       return (new Obstacle({
         sprite: sprite
