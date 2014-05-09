@@ -12,7 +12,7 @@
       var y = options.y, sprite;
       sprite = new ss2d.Sprite(nextXPosition,
                                y,
-                               45,
+                               35,
                                1200,
                                'assets/img/pillar.png');
       nextXPosition += 400;
@@ -69,7 +69,7 @@
     tick: function(deltaTime) {
       this.sprite.mLocation.mX -= this.speed;
       if(this.sprite.mLocation.mX < -100) {
-        // subtract 800 pixels because 
+        // subtract 800 pixels because
         // sprites disappars 100 pixels off screen
         // and started 700px onscreen
         this.sprite.mLocation.mX = ObstacleFactory.nextPos() - 800;
