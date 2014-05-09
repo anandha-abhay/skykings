@@ -1,10 +1,7 @@
 !function(_,ss2d,window,undefined) {
 
   window.Game = function(){
-    document.getElementById('mainCanvas').focus();
-    this.view = new ss2d.View('mainCanvas');
-    this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
-    this.sprites = [
+    var spritesConfigs = [
       CharacterFactory.get({
         name: "Azul", keyboard: "2"
       }),
@@ -13,14 +10,31 @@
       }),
       CharacterFactory.get({
         name: "Naranja", keyboard: "1"
+      }),
+      CharacterFactory.get({
+        name: "Verde", keyboard: "4"
       })
     ];
+    var maxPlayers = spritesConfigs.length;
+    var minPlayers = 2;
+    document.getElementById('mainCanvas').focus();
+    this.view = new ss2d.View('mainCanvas');
+    this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
+    var playerCount
+    while(isNaN(playerCount))
+      playerCount = Math.min(4,Math.max(2,parseInt(prompt("how many players ("+minPlayers+"-"+maxPlayers+")?", "2"),10)))
+    
+    this.sprites = []
+
+    for(var i = 0; i < playerCount; i++) {
+      this.sprites.push(spritesConfigs[i])
+    }
     this.obstacles = ObstacleFactory.getSet(10);
 
     this.scoreBoard = new ScoreBoard
 
-    var i,charac, alive = this.sprites.slice(0);
-    for(i = this.sprites.length; i--;){
+    var i,iLen, charac, alive = this.sprites.slice(0);
+    for(i = 0, iLen = this.sprites.length; i< iLen ;i++){
       this.scoreBoard.add(this.sprites[i])
       this.sprites[i].addListener('died', function(){
         alive = _(alive).reject(_.bind(function(sprite){

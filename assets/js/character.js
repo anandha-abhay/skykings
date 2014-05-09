@@ -14,6 +14,10 @@
         "scale": 0.25,
         "img"  : "assets/img/azul.reelset"
       },
+      'Verde' : {
+        "scale": 0.25,
+        "img"  : "assets/img/verde.reelset"
+      },
       'Naranja' : {
         "scale": 0.25,
         "img"  : "assets/img/naranja.reelset"
@@ -27,7 +31,8 @@
     var keyboards = {
       "1" : ["S","A","D"],
       "2" : ["K","J","L"],
-      "3" : ["X","Z","C"]
+      "3" : ["X","Z","C"],
+      "4" : ["N","B","M"]
     }
 
     var getKeyboard = function(keyboard) {
