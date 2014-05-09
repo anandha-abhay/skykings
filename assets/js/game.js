@@ -32,7 +32,7 @@
       })
     }
 
-    //this.addObjects(this.obstacles, this.view.mMainScene, "sprite");
+    this.addObjects(this.obstacles, this.view.mMainScene, "sprite");
     this.addObjects(this.scoreBoard, this.view.mMainScene, "view");
     this.addObjects(this.sprites, this.view.mMainScene, "container");
   }
