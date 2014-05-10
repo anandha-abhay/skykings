@@ -1,6 +1,6 @@
 !function(_,ss2d,window,undefined) {
 
-  window.Game = function(){
+  window.Game = function() {
     var spritesConfigs = [
       CharacterFactory.get({
         name: "Naranja", keyboard: "1"
@@ -20,11 +20,11 @@
     document.getElementById('mainCanvas').focus();
     this.view = new ss2d.View('mainCanvas');
     this.view.mMainScene.addObject(new ss2d.Sprite(0, 0, 800, 600, 'assets/img/bg.png'));
-    var playerCount
+    var playerCount;
     while(isNaN(playerCount))
-      playerCount = Math.min(4,Math.max(2,parseInt(prompt("how many players ("+minPlayers+"-"+maxPlayers+")?", "2"),10)))
-    
-    this.sprites = []
+      playerCount = Math.min(4,Math.max(1,parseInt(prompt("How many players ("+minPlayers+"-"+maxPlayers+")?", "2"),10)));
+
+    this.sprites = [];
 
     for(var i = 0; i < playerCount; i++) {
       this.sprites.push(spritesConfigs[i])
@@ -35,7 +35,10 @@
 
     var i,iLen, charac, alive = this.sprites.slice(0);
     for(i = 0, iLen = this.sprites.length; i< iLen ;i++){
-      this.scoreBoard.add(this.sprites[i])
+      this.scoreBoard.addPlayer(this.sprites[i])
+      if(playerCount === 1) {
+        this.scoreBoard.addScoreTracker(this.sprites[i]) ;
+      }
       this.sprites[i].addListener('died', function(){
         alive = _(alive).reject(_.bind(function(sprite){
           return sprite.name== this.name

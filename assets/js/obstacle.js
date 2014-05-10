@@ -80,12 +80,13 @@
 
     processHits: function() {
       // Remeber sprites have a diameter of 60px
-      var middle, gapLowerBound, gapUpperBound, colliderBounds;
+      var middle, gapLowerBound, gapUpperBound, colliderBounds, exitBoundry;
 
       colliderBounds = this.sprite.getBounds();
       middle = colliderBounds.mY + 581;
       gapUpperBound = middle - 85;
       gapLowerBound = middle + 85;
+      exitBoundry = colliderBounds.mX + 35;
 
       for(var childIndex in this.sprite.mParent.mChildren) {
         var brother = this.sprite.mParent.mChildren[childIndex];
@@ -97,6 +98,8 @@
             var brotherYLower = brotherYUpper + 80;
             if(brotherYUpper < gapUpperBound || brotherYLower > gapLowerBound) {
               brother.character.takeDamage();
+            } else if( exitBoundry === 35 ) {
+              brother.character.addPoint();
             }
           }
         }

@@ -91,6 +91,7 @@
     //Sprite Elements
     this.container = options.container;
     this.guy = this.container.guy;
+    this.points = 0;
     this.shield = this.container.shield;
     this.attack = this.container.attack;
     this._boundaries = this.container._boundaries;
@@ -160,6 +161,12 @@
     blinkInvincible : function(){
       this.invincible = 100;
     },
+    addPoint : function() {
+      if( !this.invincible ) {
+        this.points++;
+        this.emit('obstacleDodged');
+      }
+    },
     takeDamage : function(){
       if(!this.invincible) {
         this.hp = Math.max(0,this.hp - 1)
@@ -192,14 +199,14 @@
       } else {
         if('attack' == animation) {
           attack = 1
-        } 
+        }
         guy = animation
       }
       this.shield.mAlpha = shield;
       this.attack.mAlpha = attack;
 
       if(this.guy.mPlayingReel.mName != guy)
-        this.guy.playReel(guy); 
+        this.guy.playReel(guy);
     },
     tick: function(deltaTime) {
       if(!this.guy.mPlayingReel ) return;
