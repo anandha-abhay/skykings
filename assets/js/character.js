@@ -43,13 +43,14 @@
         "block" : ss2d.Input.Keys[keys[2]]
       };
     }
-    var startingSpot = 0;
+    var startingSpots = [0,100,200,300];
     var get = function(options) {
       var name = options.name
         , keyboard = options.keyboard
+        , startingSpot = Math.floor(Math.random() * startingSpots.length)
         , c = characters[name]
-        , container = new ss2d.DisplayObjectContainer(30, (startingSpot++)*100)
-
+        , container;
+      container = new ss2d.DisplayObjectContainer(30, startingSpots.splice(startingSpot, 1)[0] || 0 )
       // this is the character sprite
       container.guy = (new ss2d.ReelSprite(
         0,0, c.scale, c.img, 'flying'
