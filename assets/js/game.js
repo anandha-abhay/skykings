@@ -3,13 +3,13 @@
   window.Game = function(){
     var spritesConfigs = [
       CharacterFactory.get({
+        name: "Naranja", keyboard: "1"
+      }),
+      CharacterFactory.get({
         name: "Azul", keyboard: "2"
       }),
       CharacterFactory.get({
         name: "Morado", keyboard: "3"
-      }),
-      CharacterFactory.get({
-        name: "Naranja", keyboard: "1"
       }),
       CharacterFactory.get({
         name: "Verde", keyboard: "4"

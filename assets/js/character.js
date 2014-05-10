@@ -69,12 +69,10 @@
       container.addObject(container.attack)
 
       // there are some issues with the container bounds, let us fake the bounds
-      var fakeAssBounds = container.guy.getBounds();
-      container.boundaries= (new ss2d.Rectangle(
+      container._boundaries= (new ss2d.Rectangle(
         container.mLocation.mX,
         container.mLocation.mY,
-        fakeAssBounds.mWidth,
-        fakeAssBounds.mHeight))
+        0,0))
 
       return (new Character({
         name : name,
@@ -95,7 +93,7 @@
     this.guy = this.container.guy;
     this.shield = this.container.shield;
     this.attack = this.container.attack;
-    this.boundaries = this.container.boundaries;
+    this._boundaries = this.container._boundaries;
     this.keyboard = options.keyboard;
 
     // container can reference Character
@@ -112,7 +110,15 @@
 
   _.extend(window.Character.prototype, EventEmitter.prototype,  {
     setLocation : function(newPos) {
-      this.boundaries.mY = this.container.mLocation.mY = newPos;
+      this._boundaries.mY = this.container.mLocation.mY = newPos;
+    },
+    boundaries : function(){
+      var fakeAssBounds = this.guy.getBounds();
+      return (new ss2d.Rectangle(
+        this._boundaries.mX,
+        this._boundaries.mY,
+        fakeAssBounds.mWidth,
+        fakeAssBounds.mHeight))
     },
     flap : function(){
       var currentPos = this.container.mLocation.mY;
@@ -137,14 +143,14 @@
       flyLooper()
     },
     onPlayer : function(){
-      var colliderBounds = this.boundaries,
+      var colliderBounds = this.boundaries(),
           collidedWith = [];
       for(var childIndex in this.container.mParent.mChildren) {
         var brother = this.container.mParent.mChildren[childIndex];
         //check that the other object is not itself
         if(brother != this.container && brother.character) {
           //if the objects collide change the direction.
-          if(colliderBounds.intersectsRectangle(brother.boundaries)) {
+          if(colliderBounds.intersectsRectangle(brother.character.boundaries())) {
             collidedWith.push(brother.character);
           }
         }
