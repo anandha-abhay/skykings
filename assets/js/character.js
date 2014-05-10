@@ -226,17 +226,16 @@
       this.invincible = Math.max(0,this.invincible - 1);
 
       // only one button can be pressed during a tick
-      if(input.isKeyPressed(this.keyboard.fly)) {
+      if (input.isKeyPressed(this.keyboard.attack)) {
+        this.attacking = true && !this.invincible;
+        animation = 'attack';
+      } else if(input.isKeyPressed(this.keyboard.block)) {
+        this.blocking = true && !this.invincible;
+        animation = 'block'
+      } else if(input.isKeyPressed(this.keyboard.fly)) {
         this.flap()
-      } else if(1 || !this.invincible) { //cant attack of block if invincible
-        if (input.isKeyPressed(this.keyboard.attack)) {
-          this.attacking = true;
-          animation = 'attack';
-        } else if(input.isKeyPressed(this.keyboard.block)) {
-          this.blocking = true;
-          animation = 'block'
-        }
       }
+
       if (this.invincible){
         animation = 'invincible'
       }
