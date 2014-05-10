@@ -92,7 +92,7 @@
         //check that the other object is not itself
         if(brother != this.sprite && brother.character) {
           //if the objects collide change the direction.
-          if(colliderBounds.intersectsRectangle(brother.boundaries)) {
+          if(colliderBounds.intersectsRectangle(brother.character.boundaries())) {
             var brotherYUpper = brother.mLocation.mY;
             var brotherYLower = brotherYUpper + 80;
             if(brotherYUpper < gapUpperBound || brotherYLower > gapLowerBound) {
